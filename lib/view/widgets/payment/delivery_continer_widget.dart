@@ -28,9 +28,9 @@ class _DeliveryContinerWidgetState extends State<DeliveryContinerWidget> {
       children: [
         buildRadioContiner(
           address: "Egypt,sohag medanelshoban el moslmean",
-          name: "asroo store",
-          phone: "51-887-9932",
-          title: "Asroo Shop",
+          name: "world store",
+          phone: "01028544373",
+          title: "world store",
           value: 1,
           color: changeColors ? Colors.white : Colors.grey.shade300,
           icon: Container(),
