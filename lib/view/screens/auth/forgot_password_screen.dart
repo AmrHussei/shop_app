@@ -59,7 +59,7 @@ class ForgetPassword extends StatelessWidget {
                     height: MediaQuery.of(context).size.height / 19.2,
                   ),
                   Image.asset(
-                    'images/forgetpass copy.png',
+                    'images/forget.jpg',
                     width: MediaQuery.of(context).size.width / 1.8,
                   ),
                   SizedBox(
@@ -74,7 +74,11 @@ class ForgetPassword extends StatelessWidget {
                         return 'Enter valid email';
                       }
                     },
-                    prefixIcon: Image.asset('images/email.png'),
+                    prefixIcon: const Icon(
+                      Icons.email,
+                      color: mainColor,
+                      size: 27,
+                    ),
                     suffixIcon: const Text(''),
                     hintText: 'Email',
                   ),
