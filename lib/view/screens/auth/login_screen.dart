@@ -68,7 +68,11 @@ class LogInScreen extends StatelessWidget {
                             return 'Enter valid email';
                           }
                         },
-                        prefixIcon: Image.asset('images/email.png'),
+                        prefixIcon: const Icon(
+                          Icons.email,
+                          color: mainColor,
+                          size: 27,
+                        ),
                         suffixIcon: const Text(''),
                         hintText: 'Email',
                       ),
@@ -158,17 +162,17 @@ class LogInScreen extends StatelessWidget {
                           GetBuilder<AuthController>(builder: (_) {
                             return InkWell(
                               onTap: () {
-                                authController.googleSignIn();
+                                authController.googleSinUpApp();
                               },
                               child: Image.asset('images/google.png'),
                             );
                           }),
-                          const SizedBox(
+                          /* const SizedBox(
                             width: 15,
                           ),
                           InkWell(
                               onTap: () {},
-                              child: Image.asset('images/facebook.png')),
+                              child: Image.asset('images/facebook.png')),*/
                         ],
                       )
                     ],

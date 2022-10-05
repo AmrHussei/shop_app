@@ -74,7 +74,11 @@ class SignUpScreen extends StatelessWidget {
                             return null;
                           }
                         },
-                        prefixIcon: Image.asset('images/user.png'),
+                        prefixIcon: const Icon(
+                          Icons.person,
+                          color: mainColor,
+                          size: 28,
+                        ),
                         suffixIcon: const Text(''),
                         hintText: 'User Name',
                       ),
@@ -90,7 +94,11 @@ class SignUpScreen extends StatelessWidget {
                             return 'Enter valid email';
                           }
                         },
-                        prefixIcon: Image.asset('images/email.png'),
+                        prefixIcon: const Icon(
+                          Icons.email,
+                          color: mainColor,
+                          size: 28,
+                        ),
                         suffixIcon: const Text(''),
                         hintText: 'Email',
                       ),
@@ -145,8 +153,7 @@ class SignUpScreen extends StatelessWidget {
                                     backgroundColor: pinkClr,
                                     borderRadius: 15,
                                     snackPosition: SnackPosition.TOP);
-                              }
-                              else if (formKey.currentState!.validate()) {
+                              } else if (formKey.currentState!.validate()) {
                                 String email = emailController.text;
                                 String password = emailController.text.trim();
                                 String name = emailController.text.trim();

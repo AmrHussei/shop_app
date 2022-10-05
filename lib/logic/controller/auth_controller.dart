@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shop_app/routes/routes.dart';
 import 'package:shop_app/utils/theme.dart';
@@ -10,8 +11,13 @@ class AuthController extends GetxController {
   bool isVisability = false;
   bool isCheckBox = false;
   FirebaseAuth auth = FirebaseAuth.instance;
-  var displayUserName = '';
-  var displayUsephoto = '';
+  var displayUserName = ''.obs;
+  var displayUserPhoto = ''.obs;
+  var displayUserEmail = ''.obs;
+  bool isSignIn = false;
+  var googleSignIn = GoogleSignIn();
+
+  static final authBox = GetStorage();
 
   void visabilityFun() {
     isVisability = !isVisability;
@@ -21,6 +27,12 @@ class AuthController extends GetxController {
   void checkBox() {
     isCheckBox = !isCheckBox;
     update();
+  }
+
+  @override
+  void onInit() {
+    googleSinUpApp();
+    super.onInit();
   }
 
   void signUpUsingFirebase({
@@ -36,13 +48,15 @@ class AuthController extends GetxController {
         password: password,
       )
           .then((value) {
-        displayUserName = name;
+        displayUserName.value = name;
 
-        auth.currentUser!.updateDisplayName(displayUserName);
+        auth.currentUser!.updateDisplayName(displayUserName.value);
       });
       Get.offAllNamed(Routes.mainScreen);
 
       update();
+      isSignIn = true;
+      authBox.write("isSignIn", isSignIn);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         message = 'The password provided is too weak.';
@@ -72,9 +86,11 @@ class AuthController extends GetxController {
       await auth
           .signInWithEmailAndPassword(email: email, password: password)
           .then((value) {
-        displayUserName = auth.currentUser!.displayName!;
+        displayUserName.value = auth.currentUser!.displayName!;
       });
       Get.offAllNamed(Routes.mainScreen);
+      isSignIn = true;
+      authBox.write("isSignIn", isSignIn);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         message = 'No user found for that email.';
@@ -147,24 +163,55 @@ class AuthController extends GetxController {
     }
   }
 
-  void googleSignIn() async {
+  void googleSinUpApp() async {
     try {
-      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-      displayUserName = googleUser!.displayName!;
-      if (googleUser.photoUrl != null) {
-        displayUsephoto = googleUser.photoUrl!;
-      }
+      final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+      displayUserName.value = googleUser!.displayName!;
+      displayUserPhoto.value = googleUser.photoUrl!;
+      displayUserEmail.value = googleUser.email;
+
+      GoogleSignInAuthentication googleSignInAuthentication =
+          await googleUser.authentication;
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        idToken: googleSignInAuthentication.idToken,
+        accessToken: googleSignInAuthentication.accessToken,
+      );
+
+      await auth.signInWithCredential(credential);
+
+      isSignIn = true;
+      authBox.write("auth", isSignIn);
       update();
-      Get.offAllNamed(Routes.mainScreen);
-    } catch (e) {
-      Get.snackbar('Error', e.toString(),
-          backgroundColor: pinkClr,
-          borderRadius: 15,
-          snackPosition: SnackPosition.TOP);
+
+      Get.offNamed(Routes.mainScreen);
+    } catch (error) {
+      Get.snackbar(
+        'Error!',
+        error.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.green,
+        colorText: Colors.white,
+      );
     }
   }
 
   void facebookSignUp() {}
 
-  void signOutFromApp() {}
+  void logOutFromApp() async {
+    try {
+      await auth.signOut();
+      await GoogleSignIn().signOut();
+      displayUserName.value = '';
+      displayUserPhoto.value = '';
+      Get.offAllNamed(Routes.welcomeScreen);
+      update();
+      isSignIn = false;
+      authBox.remove('isSignIn');
+    } catch (error) {
+      Get.snackbar('Error', error.toString(),
+          backgroundColor: pinkClr,
+          borderRadius: 15,
+          snackPosition: SnackPosition.TOP);
+    }
+  }
 }

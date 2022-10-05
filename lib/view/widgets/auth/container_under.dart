@@ -38,7 +38,7 @@ class ContainerUnder extends StatelessWidget {
               text: text2,
               fontSize: 20,
               fontWeight: FontWeight.w500,
-              color: darkSettings,
+              color: darkGreyClr,
             ),
           ),
         ],

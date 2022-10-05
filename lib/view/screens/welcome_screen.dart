@@ -17,7 +17,7 @@ class WelcomeScreen extends StatelessWidget {
             height: double.infinity,
             width: double.infinity,
             child: Image.asset(
-              'images/background.jpg',
+              'images/welcom1.jpg',
               fit: BoxFit.cover,
             ),
           ),
@@ -58,7 +58,7 @@ class WelcomeScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: const [
                         TextUtils(
-                            text: 'Asroo',
+                            text: 'world',
                             fontSize: 35,
                             fontWeight: FontWeight.bold,
                             color: mainColor),
@@ -66,7 +66,7 @@ class WelcomeScreen extends StatelessWidget {
                           width: 7,
                         ),
                         TextUtils(
-                            text: 'shop',
+                            text: 'store',
                             fontSize: 35,
                             fontWeight: FontWeight.bold,
                             color: Colors.white),
