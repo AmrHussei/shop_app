@@ -33,5 +33,8 @@ google font , get storage ,geolocator, carousel_slider, geocoding }
 ![Screenshot 2022-10-05 172408](https://user-images.githubusercontent.com/94804979/194102934-84dc0ea8-25e5-4701-9e5a-8362fbb68e19.png)
 ![Screenshot 2022-10-05 172942](https://user-images.githubusercontent.com/94804979/194102957-646f1fcb-ba90-444d-9eda-12456f7a626d.png)
 ![Screenshot 2022-10-05 173020](https://user-images.githubusercontent.com/94804979/194102979-e51b4eb7-1a1e-40ac-a4a7-b158dfe15ca5.png)
+![Screenshot 2022-10-05 175855](https://user-images.githubusercontent.com/94804979/194107206-dc3d02ab-6d8c-43af-a313-ad150e7d67d8.png)
+![Screenshot 2022-10-05 175909](https://user-images.githubusercontent.com/94804979/194107260-80255989-1df9-4c22-a184-bb79c1051e95.png)
+
 ![Screenshot 2022-10-05 172314](https://user-images.githubusercontent.com/94804979/194103162-893275e8-33ec-4019-afbb-30614800b54e.png)
 
